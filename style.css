@@ -196,6 +196,38 @@ a {
 	color: #fff;
 }
 
+.form {
+	border: 1px solid black;
+	margin-top: 40px;
+	padding: 16px;
+}
+
+.form h2 {
+	border-bottom: 1px solid black;
+	margin-bottom: 20px;
+}
+
+.form input {
+	border: 1px solid black;
+	display: block;
+	margin-bottom: 20px;
+}
+
+.form textarea {
+	border: 1px solid black;
+	display: block;
+	height: 200px;
+	margin-bottom: 20px;
+	max-width: 700px;
+	width: 80%;
+}
+
+.form button {
+	border: 1px solid black;
+	display: block;
+	margin-top: 20px;
+}
+
 .gallery {
 	margin-top: 2.5rem;
 }
@@ -256,6 +288,12 @@ html {
 
 .filter__button {
 	margin-right: 2rem;
+}
+
+.form textarea {
+	height: 400px;
+	max-width: 700px;
+	width: 100%;
 }
 
 .gallery {
