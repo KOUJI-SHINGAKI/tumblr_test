@@ -145,6 +145,14 @@ a {
 	transition: opacity 0.3s;
 }
 
+.original {
+	margin-top: 2.5rem;
+}
+
+.works {
+	margin-top: 2.5rem;
+}
+
 .filter {
 	margin-top: 3.25rem;
 	position: relative;
@@ -228,21 +236,28 @@ a {
 	margin-top: 20px;
 }
 
-.gallery {
-	margin-top: 2.5rem;
-}
-
 .gallery__grid {
+	-moz-column-gap: 0.5rem;
+	column-gap: 0.5rem;
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
 	margin-top: 2.5rem;
+	row-gap: 2rem;
 }
 
 .gallery__grid img {
-	-o-object-fit: cover;
+	-o-object-fit: fill;
+	aspect-ratio: 1/1;
 	cursor: pointer;
-	object-fit: cover;
+	object-fit: fill;
+}
+
+.gallery__grid video {
+	-o-object-fit: fill;
+	aspect-ratio: 1/1;
+	cursor: pointer;
+	object-fit: fill;
+	width: 100%;
 }
 
 .inner {
@@ -251,6 +266,49 @@ a {
 	padding-left: 20px;
 	padding-right: 20px;
 	width: 100%;
+}
+
+.more-button {
+	border: 1px solid black;
+	display: inline-block;
+	margin-left: auto;
+	margin-top: 24px;
+	padding: 8px;
+	text-transform: capitalize;
+}
+
+.more-button__wrapper {
+	margin-right: 16px;
+	text-align: right;
+}
+
+.more-button span {
+	padding-left: 0.5em;
+}
+
+.pagination-container {
+	margin-top: 24px;
+	text-align: center;
+}
+
+.pagination-button {
+	background: #ddd;
+	border: none;
+	cursor: pointer;
+	font-size: 24px;
+	margin: 0 5px;
+	padding: 8px 12px;
+}
+
+.pagination-button.is-active {
+	background: #333;
+	color: white;
+	font-weight: bold;
+}
+
+.section-title {
+	text-align: center;
+	text-transform: capitalize;
 }
 
 @media screen and (min-width: 768px) {
@@ -265,6 +323,14 @@ a {
 
 html {
 	font-size: 1.4545454545vw;
+}
+
+.original {
+	margin-top: 7.5rem;
+}
+
+.works {
+	margin-top: 7.5rem;
 }
 
 .filter {
@@ -296,51 +362,10 @@ html {
 	width: 100%;
 }
 
-.gallery {
-	margin-top: 7.5rem;
-}
-
 .gallery__grid {
 	display: grid;
 	grid-auto-flow: dense;
-	grid-template-columns: 1fr 0.16fr 1fr;
-	margin-top: 5rem;
-}
-
-.gallery__grid img:nth-of-type(6n+1) {
-	aspect-ratio: 492/746;
-	grid-column: span 1;
-	grid-row: span 2;
-}
-
-.gallery__grid img:nth-of-type(6n+2) {
-	aspect-ratio: 580/369;
-	grid-column: span 2;
-	grid-row: span 1;
-}
-
-.gallery__grid img:nth-of-type(6n+3) {
-	aspect-ratio: 580/369;
-	grid-column: span 2;
-	grid-row: span 1;
-}
-
-.gallery__grid img:nth-of-type(6n+4) {
-	aspect-ratio: 580/369;
-	grid-column: span 2;
-	grid-row: span 1;
-}
-
-.gallery__grid img:nth-of-type(6n+5) {
-	aspect-ratio: 580/369;
-	grid-column: span 2;
-	grid-row: span 1;
-}
-
-.gallery__grid img:nth-of-type(6n+6) {
-	aspect-ratio: 492/746;
-	grid-column: span 1;
-	grid-row: span 2;
+	grid-template-columns: 1fr 1fr 1fr;
 }
 
 .inner {
