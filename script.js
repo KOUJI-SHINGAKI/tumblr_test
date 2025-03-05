@@ -109,29 +109,33 @@ jQuery(function ($) {
               }
               var mediaContainer = document.createElement('div');
               mediaContainer.classList.add('gallery-item');
-              var mediaElement;
               if (mediaType === "video") {
-                mediaElement = document.createElement('video');
-                mediaElement.src = mediaUrl;
-                mediaElement.controls = true;
-                mediaElement.classList.add('gallery-video');
+                // 動画の処理
+                var videoElement = document.createElement('video');
+                videoElement.src = mediaUrl;
+                videoElement.controls = true;
+                videoElement.classList.add('gallery-video');
+                mediaContainer.appendChild(videoElement);
               } else {
-                mediaElement = document.createElement('img');
-                mediaElement.src = mediaUrl;
-                mediaElement.alt = 'Tumblr Image';
-                mediaElement.classList.add('gallery-image');
+                // 画像の処理 (aタグの中にimgタグを入れる)
                 var linkElement = document.createElement('a');
                 linkElement.href = postUrl;
                 linkElement.target = '_blank';
-                linkElement.classList.add('gallery-item');
-                linkElement.appendChild(mediaElement);
+                linkElement.classList.add('gallery-item-link');
+                var imageElement = document.createElement('img');
+                imageElement.src = mediaUrl;
+                imageElement.alt = 'Tumblr Image';
+                imageElement.classList.add('gallery-image');
+                linkElement.appendChild(imageElement);
                 mediaContainer.appendChild(linkElement);
               }
-              mediaContainer.appendChild(mediaElement);
               mediaGallery.appendChild(mediaContainer);
               return new Promise(function (resolve) {
-                mediaElement.addEventListener('load', resolve);
-                mediaElement.addEventListener('error', resolve);
+                if (mediaType === "video") {
+                  mediaContainer.firstChild.addEventListener('loadeddata', resolve);
+                } else {
+                  mediaContainer.firstChild.firstChild.addEventListener('load', resolve);
+                }
               });
             }).filter(Boolean);
             _context.next = 22;
