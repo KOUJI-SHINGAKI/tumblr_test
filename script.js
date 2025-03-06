@@ -12,42 +12,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 jQuery(function ($) {
   // この中であればWordpressでも「$」が使用可能になる
-  // フィルターボタン初期
-  //   $(function(){
-  //     var $btn = $('.filter__body [data-filter]'),
-  //     $list = $('.gallery__grid [data-category]');
-  //     $(document).on('click', '.filter__body [data-filter]', function(e) {
-  //       e.preventDefault();
-  //       var $btnTxt = $(this).attr('data-filter');
-  //       console.log("選択されたフィルタ:", $btnTxt);
-  //       var $list = $('.gallery__grid [data-category]');
-  //       console.log("取得したリスト:", $list); // ここで確認
-  //       if ($btnTxt === 'all') {
-  //           $list.fadeIn();
-  //       } else {
-  //           $list.hide().filter('[data-category="' + $btnTxt + '"]').fadeIn();
-  //       }
-  //   });
-  //     $btn.on('click', function(e) {
-  //       e.preventDefault();
-  //       var $btnTxt = $(this).attr('data-filter');
-  //       if ($btnTxt == 'all'){
-  //         $list.fadeOut().promise().done(function() {
-  //           $list.fadeIn();
-  //         });
-  //       } else {
-  //         $list.fadeOut().promise().done(function() {
-  //           $list.filter('[data-category = "' + $btnTxt + '"]').fadeIn();
-  //         });
-  //       }
-  //     });
-  //   });
-  //   $(function(){
-  //     $('.filter__button').on('click', function(){
-  //       $('.filter__button').removeClass('is-active');
-  //       $(this).addClass('is-active');
-  //     });
-  //   }); 
   // 最新の6件だけ表示する場合
   function fetchTumblrMedia(_x, _x2) {
     return _fetchTumblrMedia.apply(this, arguments);
@@ -266,25 +230,24 @@ jQuery(function ($) {
       }
       var mediaContainer = document.createElement('div');
       mediaContainer.classList.add('gallery-item');
-      var mediaElement;
       if (mediaType === "video") {
-        mediaElement = document.createElement('video');
-        mediaElement.src = mediaUrl;
-        mediaElement.controls = true;
-        mediaElement.classList.add('gallery-video');
+        var videoElement = document.createElement('video');
+        videoElement.src = mediaUrl;
+        videoElement.controls = true;
+        videoElement.classList.add('gallery-video');
+        mediaContainer.appendChild(videoElement);
       } else {
-        mediaElement = document.createElement('img');
-        mediaElement.src = mediaUrl;
-        mediaElement.alt = 'Tumblr Image';
-        mediaElement.classList.add('gallery-image');
         var linkElement = document.createElement('a');
         linkElement.href = postUrl;
         linkElement.target = '_blank';
-        linkElement.classList.add('gallery-item');
-        linkElement.appendChild(mediaElement);
+        linkElement.classList.add('gallery-item-link');
+        var imageElement = document.createElement('img');
+        imageElement.src = mediaUrl;
+        imageElement.alt = 'Tumblr Image';
+        imageElement.classList.add('gallery-image');
+        linkElement.appendChild(imageElement);
         mediaContainer.appendChild(linkElement);
       }
-      mediaContainer.appendChild(mediaElement);
       container.appendChild(mediaContainer);
     });
   }
