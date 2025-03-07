@@ -73,10 +73,13 @@ jQuery(function ($) {
               }
               var mediaContainer = document.createElement('div');
               mediaContainer.classList.add('gallery-item');
+              if (imageUrls && imageUrls.length > 1) {
+                mediaContainer.classList.add('multi-images');
+              }
               if (mediaType === "video") {
                 // 動画の処理
                 var videoElement = document.createElement('video');
-                videoElement.src = mediaUrl;
+                videoElement.src = mediaUrl + "#t=0.01";
                 videoElement.controls = true;
                 videoElement.classList.add('gallery-video');
                 mediaContainer.appendChild(videoElement);
@@ -230,9 +233,12 @@ jQuery(function ($) {
       }
       var mediaContainer = document.createElement('div');
       mediaContainer.classList.add('gallery-item');
+      if (imageUrls && imageUrls.length > 1) {
+        mediaContainer.classList.add('multi-images');
+      }
       if (mediaType === "video") {
         var videoElement = document.createElement('video');
-        videoElement.src = mediaUrl;
+        videoElement.src = mediaUrl + "#t=0.01";
         videoElement.controls = true;
         videoElement.classList.add('gallery-video');
         mediaContainer.appendChild(videoElement);
