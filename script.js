@@ -47,19 +47,18 @@ jQuery(function ($) {
               _context.next = 12;
               break;
             }
-            throw new Error("HTTP\u30A8\u30E9\u30FC! \u30B9\u30C6\u30FC\u30BF\u30B9: ".concat(response.status));
+            return _context.abrupt("return");
           case 12:
             _context.next = 14;
             return response.json();
           case 14:
             posts = _context.sent;
             if (posts.length) {
-              _context.next = 18;
+              _context.next = 17;
               break;
             }
-            console.warn("\u300C".concat(tag, "\u300D\u30BF\u30B0\u306E\u6295\u7A3F\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093"));
             return _context.abrupt("return");
-          case 18:
+          case 17:
             mediaGallery.innerHTML = "";
             mediaPromises = posts.map(function (post) {
               var mediaUrl = post.mediaUrl,
@@ -105,24 +104,24 @@ jQuery(function ($) {
                 }
               });
             }).filter(Boolean);
-            _context.next = 22;
+            _context.next = 21;
             return Promise.all(mediaPromises);
-          case 22:
-            _context.next = 27;
+          case 21:
+            _context.next = 26;
             break;
-          case 24:
-            _context.prev = 24;
+          case 23:
+            _context.prev = 23;
             _context.t0 = _context["catch"](6);
             console.error("エラー:", _context.t0);
-          case 27:
-            _context.prev = 27;
+          case 26:
+            _context.prev = 26;
             document.body.style.visibility = "visible";
-            return _context.finish(27);
-          case 30:
+            return _context.finish(26);
+          case 29:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[6, 24, 27, 30]]);
+      }, _callee, null, [[6, 23, 26, 29]]);
     }));
     return _fetchTumblrMedia.apply(this, arguments);
   }
@@ -164,38 +163,37 @@ jQuery(function ($) {
               _context2.next = 14;
               break;
             }
-            throw new Error("HTTP\u30A8\u30E9\u30FC! \u30B9\u30C6\u30FC\u30BF\u30B9: ".concat(response.status));
+            return _context2.abrupt("return");
           case 14:
             _context2.next = 16;
             return response.json();
           case 16:
             posts = _context2.sent;
             if (posts.length) {
-              _context2.next = 20;
+              _context2.next = 19;
               break;
             }
-            console.warn("\u300C".concat(tag, "\u300D\u30BF\u30B0\u306E\u6295\u7A3F\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093"));
             return _context2.abrupt("return");
-          case 20:
+          case 19:
             allPosts = posts;
             currentFilteredPosts = _toConsumableArray(allPosts);
             displayPage(1, containerId);
             renderPaginationControls(paginationId, containerId);
-            _context2.next = 29;
+            _context2.next = 28;
             break;
-          case 26:
-            _context2.prev = 26;
+          case 25:
+            _context2.prev = 25;
             _context2.t0 = _context2["catch"](8);
             console.error("エラー:", _context2.t0);
-          case 29:
-            _context2.prev = 29;
+          case 28:
+            _context2.prev = 28;
             document.body.style.visibility = "visible";
-            return _context2.finish(29);
-          case 32:
+            return _context2.finish(28);
+          case 31:
           case "end":
             return _context2.stop();
         }
-      }, _callee2, null, [[8, 26, 29, 32]]);
+      }, _callee2, null, [[8, 25, 28, 31]]);
     }));
     return _fetchTumblrMediaAll.apply(this, arguments);
   }
@@ -320,27 +318,23 @@ jQuery(function ($) {
   }
 
   // イベントリスナーの設定
+  var addFilterEventListener = function addFilterEventListener(id, type, containerId, paginationId) {
+    var element = document.getElementById(id);
+    if (!element) return; // 指定したIDが存在しない場合は処理を中断
+    element.addEventListener('click', function () {
+      return filterMedia(type, containerId, paginationId);
+    });
+  };
+
   // works 用
-  document.getElementById('filter-images').addEventListener('click', function () {
-    return filterMedia('image', 'works-gallery__grid', 'pagination-container');
-  });
-  document.getElementById('filter-videos').addEventListener('click', function () {
-    return filterMedia('video', 'works-gallery__grid', 'pagination-container');
-  });
-  document.getElementById('filter-all').addEventListener('click', function () {
-    return filterMedia('all', 'works-gallery__grid', 'pagination-container');
-  });
+  addFilterEventListener('filter-images', 'image', 'works-gallery__grid', 'pagination-container');
+  addFilterEventListener('filter-videos', 'video', 'works-gallery__grid', 'pagination-container');
+  addFilterEventListener('filter-all', 'all', 'works-gallery__grid', 'pagination-container');
 
   // original 用
-  document.getElementById('filter-images').addEventListener('click', function () {
-    return filterMedia('image', 'original-gallery__grid', 'pagination-container');
-  });
-  document.getElementById('filter-videos').addEventListener('click', function () {
-    return filterMedia('video', 'original-gallery__grid', 'pagination-container');
-  });
-  document.getElementById('filter-all').addEventListener('click', function () {
-    return filterMedia('all', 'original-gallery__grid', 'pagination-container');
-  });
+  addFilterEventListener('filter-images', 'image', 'original-gallery__grid', 'pagination-container');
+  addFilterEventListener('filter-videos', 'video', 'original-gallery__grid', 'pagination-container');
+  addFilterEventListener('filter-all', 'all', 'original-gallery__grid', 'pagination-container');
 
   // データ取得
   fetchTumblrMediaAll("works", "works-gallery__grid", "pagination-container");
